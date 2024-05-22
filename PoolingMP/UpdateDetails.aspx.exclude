@@ -1,0 +1,135 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/PoolingMP/MasterPage.master" AutoEventWireup="true" CodeFile="UpdateDetails.aspx.cs" Inherits="PoolingMP_UpdateDetails" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+          <style>
+
+        .validation-error {
+        display: none;
+        font-size: 12px;
+        }
+      .validation-error:before {
+        content: "* ";
+      }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+  <div class="wrapper">
+    <div class="content-wrapper">
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-10 mt-4">
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Update Personal Details</h3>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-3">
+                      <asp:Label runat="server">Name</asp:Label>
+                      <asp:TextBox ID="tb_Name" runat="server" class="form-control" ReadOnly="true" style="cursor:not-allowed;"/>
+                    </div>
+                    <div class="col-3">
+                      <asp:Label runat="server">Email</asp:Label>
+                      <asp:TextBox ID="tb_Email" runat="server" class="form-control" ReadOnly="true" style="cursor:not-allowed;"/>
+                    </div>
+                    <div class="col-3">
+                      <asp:Label runat="server">Mobile No.</asp:Label>
+                      <asp:TextBox ID="tb_Mobile" runat="server" class="form-control" />
+                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+              ControlToValidate="tb_Mobile"
+              InitialValue=""
+              ErrorMessage="Enter Mobile No."
+              ForeColor="Red"
+              CssClass="validation-error"
+              Display="Dynamic">
+        </asp:RequiredFieldValidator>
+                    </div>
+                    <div class="col-3">
+                      <asp:Label runat="server">Gender</asp:Label>
+                      <asp:DropDownList ID="dd_Gender" runat="server" class="form-control select2">
+                        <asp:ListItem Text="Select Gender" Value="" Disabled="true" Selected="True"></asp:ListItem>
+                        <asp:ListItem runat="server">Male</asp:ListItem>
+                        <asp:ListItem runat="server">Female</asp:ListItem>
+                      </asp:DropDownList>
+                                                  <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
+              ControlToValidate="dd_Gender"
+              InitialValue=""
+              ErrorMessage="Select Your Gender"
+              ForeColor="Red"
+              CssClass="validation-error"
+              Display="Dynamic">
+        </asp:RequiredFieldValidator>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-4">
+                      <asp:Label runat="server">Address</asp:Label>
+                      <asp:TextBox ID="tb_Address" runat="server" class="form-control" />
+                             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
+              ControlToValidate="tb_Address"
+              InitialValue=""
+              ErrorMessage="Enter Your Address"
+              ForeColor="Red"
+              CssClass="validation-error"
+              Display="Dynamic">
+        </asp:RequiredFieldValidator>
+                    </div>
+                    <div class="col-2">
+                      <asp:Label runat="server">Pin</asp:Label>
+                      <asp:TextBox ID="tb_Pin" runat="server" class="form-control" />
+                             <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server"
+              ControlToValidate="tb_Pin"
+              InitialValue=""
+              ErrorMessage="Enter Pincode"
+              ForeColor="Red"
+              CssClass="validation-error"
+              Display="Dynamic">
+        </asp:RequiredFieldValidator>
+                    </div>
+                    
+                    <div class="col-3">
+                      <asp:Label runat="server">City</asp:Label>
+                      <asp:TextBox ID="tb_City" runat="server" class="form-control" />
+                             <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server"
+              ControlToValidate="tb_City"
+              InitialValue=""
+              ErrorMessage="Enter City"
+              ForeColor="Red"
+              CssClass="validation-error"
+              Display="Dynamic">
+        </asp:RequiredFieldValidator>
+                    </div>
+                    
+                    <div class="col-3">
+                      <asp:Label runat="server">State</asp:Label>
+                      <asp:TextBox ID="tb_State" runat="server" class="form-control" />
+                             <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server"
+              ControlToValidate="tb_State"
+              InitialValue=""
+              ErrorMessage="Enter State"
+              ForeColor="Red"
+              CssClass="validation-error"
+              Display="Dynamic">
+        </asp:RequiredFieldValidator>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body" style="display:flex; justify-content:center;">
+                  <div class="row">
+                    <div class="card-footer bg-white">
+                      <asp:Button ID="submit" runat="server" Text="Update" onclick="submit_Click" class="btn btn-primary" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</asp:Content>
+

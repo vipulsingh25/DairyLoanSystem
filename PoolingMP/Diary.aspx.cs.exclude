@@ -1,0 +1,92 @@
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class PoolingMP_Diary : System.Web.UI.Page
+{
+  SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MyDBconnection"].ConnectionString);
+
+  protected void Get_FarmerList()
+  {
+    connection.Open();
+    string getdata = "select ID,Name from Register_Farmers where Agent_ID = @agentid";
+    SqlCommand cmds = new SqlCommand(getdata, connection);
+    cmds.Parameters.AddWithValue("@agentid", Session["ID"].ToString());
+    SqlDataAdapter ad = new SqlDataAdapter(cmds);
+    DataTable dt = new DataTable();
+    ad.Fill(dt);
+    if (dt.Rows.Count > 0)
+    {
+      foreach (DataRow rows in dt.Rows)
+      {
+        farmer_name.Items.Add(new ListItem(rows[1].ToString(), rows[0].ToString()));
+      }
+    }
+    connection.Close();
+  }
+
+  protected void Page_Load(object sender, EventArgs e)
+    {
+    String get = "Select * from Verifymilk_Details Where ID = " + Session["ID"].ToString() + ";";
+    SqlCommand d = new SqlCommand(get, connection);
+    SqlDataAdapter ad = new SqlDataAdapter(d);
+    DataTable dt = new DataTable();
+    ad.Fill(dt);
+
+    StringBuilder sb = new StringBuilder();
+    sb.Append("<thead><tr><th>Sno</th><th>Date & Time</th><th>Milk Type</th><th>Milk Quantity (in litres)</th><th>Total Cost</th><th>Farmer ID</th></tr></thead> ");
+    sb.Append("<tbody>");
+
+    int i = 1;
+    foreach (DataRow rows in dt.Rows)
+    {
+
+      sb.Append("<tr>");
+      sb.Append("<td>" + i++ + "</td>");
+      sb.Append("<td>" + rows["Date"] + "</td>");
+      sb.Append("<td>" + rows["Milk_Type"] + "</td>");
+      sb.Append("<td>" + rows["Milk_Quantity"] + "</td>");
+      sb.Append("<td>" + rows["Total_Cost"] + "</td>");
+      sb.Append("<td>" + rows["Assigned_Farmer"] + "</td>");
+      sb.Append("</tr>");
+    }
+
+    sb.Append("</tbody>");
+
+    show.Text = sb.ToString();
+
+    Get_FarmerList();
+    }
+
+  protected void Verifymilk_Click(object sender, EventArgs e)
+  {
+    string MilkType = milk_type.Text;
+    string MilkQuantity = milk_quantity.Text;
+    string TotalCost = total_cost.Text;
+    string SelectedfarmerID = farmer_name.SelectedValue;
+
+    if (Page.IsValid)
+    {
+      connection.Open();
+
+      string savedata = "insert into Verifymilk_Details(ID,Milk_Type,Milk_Quantity,Total_Cost,Assigned_Farmer) values (N'" + Session["ID"].ToString() + "',N'" + MilkType.Replace
+("'", "") + "',N'" + MilkQuantity.Replace("'", "") + "', N'" + TotalCost.Replace("'", "") + "',N'" + SelectedfarmerID.Replace("'","") + "');select SCOPE_IDENTITY();";
+      SqlCommand cmds = new SqlCommand(savedata, connection);
+
+      int iss = cmds.ExecuteNonQuery();
+     if (iss > 0)
+      {
+        Response.Redirect(Request.RawUrl);
+
+      }
+      connection.Close();
+    }
+  }
+}

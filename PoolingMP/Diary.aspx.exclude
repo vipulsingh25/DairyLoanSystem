@@ -1,0 +1,132 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/PoolingMP/MasterPage.master" AutoEventWireup="true" CodeFile="Diary.aspx.cs" Inherits="PoolingMP_Diary" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+        <style>
+
+        .validation-error {
+          display: none;
+          font-size: 12px;
+        }
+
+    .validation-error:before {
+        content: "* ";
+    }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<div class="wrapper">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+   <!-- <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Project Add</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Loan Status</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>-->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-md-3 mt-4">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Add Daily Milk Details</h3>
+              <!--<div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>-->
+            </div>
+            <div class="card-body">
+                            <div class="form-group">
+                <asp:Label runat="server">Farmer Name</asp:Label>
+            <asp:DropDownList ID="farmer_name" runat="server" class="form-control">
+               <asp:ListItem Text="Select from list" Value="" Disabled="true" Selected="True"></asp:ListItem>
+            </asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
+              ControlToValidate="farmer_name"
+              InitialValue=""
+              ErrorMessage="Choose Farmer"
+              ForeColor="Red"
+              CssClass="validation-error"
+              Display="Dynamic">
+        </asp:RequiredFieldValidator>
+              </div>
+              <div class="form-group">
+                <asp:Label runat="server">Milk Type</asp:Label>
+            <asp:DropDownList ID="milk_type" runat="server" class="form-control">
+              <asp:ListItem Text="Choose Type" Value="" Disabled="true" Selected="True"></asp:ListItem>
+              <asp:ListItem Value="COW">COW</asp:ListItem>
+              <asp:ListItem Value="BUFFALO">BUFFALO</asp:ListItem>
+            </asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
+              ControlToValidate="milk_type"
+              InitialValue=""
+              ErrorMessage="Choose Your ID"
+              ForeColor="Red"
+              CssClass="validation-error"
+              Display="Dynamic">
+        </asp:RequiredFieldValidator>
+              </div>
+              <div class="form-group">
+                <asp:Label runat="server">Milk Quantity (in litres)</asp:Label>
+                <asp:TextBox ID="milk_quantity" runat="server" TextMode="Number" class="form-control"/>
+                       <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+              ControlToValidate="milk_quantity"
+              InitialValue=""
+              ErrorMessage="Enter Your Email"
+              ForeColor="Red"
+              CssClass="validation-error"
+              Display="Dynamic">
+        </asp:RequiredFieldValidator>
+              </div>
+              <div class="form-group">
+                <asp:Label runat="server">Total Cost</asp:Label>
+                <asp:TextBox ID="total_cost" runat="server" TextMode="Number" class="form-control"/>
+                       <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"
+              ControlToValidate="total_cost"
+              InitialValue=""
+              ErrorMessage="Enter Your Email"
+              ForeColor="Red"
+              CssClass="validation-error"
+              Display="Dynamic">
+        </asp:RequiredFieldValidator>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+                          <div class="col-4">
+          <asp:Button runat="server" ID="Verifymilk" Text="Add Details" Onclick="Verifymilk_Click" class="btn btn-success"/>
+        </div>
+          <!-- /.card -->
+        </div>
+                  <div class="col-9 mt-4">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">User Details</h3>
+                </div>
+                <div id="showdiv" class="card-body">
+                  <table id="example2" class="table table-bordered table-hover">
+                    <asp:Literal runat="server" ID="show"></asp:Literal>
+                  </table>
+                </div>
+              </div>
+            </div>
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+</div>
+</asp:Content>
+
