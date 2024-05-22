@@ -23,7 +23,7 @@ Project encompasses the creation of four distinct portals: the **Farmer Portal**
 
 ## Screenshots
 
-![App Screenshot](https://docs.google.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://drive.google.com/file/d/1u15hY-vBxwOV_GFsMQDpb96Qu6ToX3ll/view?usp=drive_link)
 
 
 ## Features
