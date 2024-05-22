@@ -1,0 +1,253 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="FarmerMP_MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="..//plugins/fontawesome-free/css/all.min.css"/>
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="..//plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css"/>
+  <!-- iCheck -->
+  <link rel="stylesheet" href="..//plugins/icheck-bootstrap/icheck-bootstrap.min.css"/>
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="..//plugins/jqvmap/jqvmap.min.css"/>
+  <!-- Theme style -->
+  <link rel="stylesheet" href="..//dist/css/adminlte.min.css"/>
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="..//plugins/overlayScrollbars/css/OverlayScrollbars.min.css"/>
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="..//plugins/daterangepicker/daterangepicker.css"/>
+  <!-- summernote -->
+  <link rel="stylesheet" href="..//plugins/summernote/summernote-bs4.min.css"/>
+
+  <style>
+    .logout-btn{
+      border:none;
+      padding:10px;
+    }
+
+            .loader {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: white;
+          text-align: center;
+          font-size: 18px;
+          z-index: 9999;
+        }
+
+        .loader div{
+          position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+        }
+  </style>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+       <div id="loader" class="loader">
+    <div>
+          <img src="../../dist/img/loader.gif" />
+      <br />
+      <p>Loading...</p>
+    </div>
+</div>
+  <form id="form1" runat="server">
+    <div class="wrapper">
+      <!-- Navbar -->
+      <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+          </li>
+          <!--<li>
+            <a>P2P MicroFinance and Allied Services</a>
+          </li>-->
+        </ul>
+
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+          <!-- Navbar Search -->
+          <li class="nav-item">
+            <i class="fas fa-sign-out-alt"></i>
+            <a id="as" onclick="LogHistory()" Class="logout-btn btn-primary">Logout</a>
+            <!--<a class="nav-link" data-widget="fullscreen" href="#" role="button">
+              <i class="fas fa-expand-arrows-alt"></i>
+            </a>-->  
+          </li>
+        </ul>
+      </nav>
+      <!-- /.navbar -->
+
+      <!-- Main Sidebar Container -->
+      <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a class="brand-link">
+          <img src="..//dist/img/DairyLogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+          <span class="brand-text font-weight-light">Dairy Farmer</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <li class="nav-header">DashBoard</li>
+              <!--<li class="nav-item">
+                <a href="./PersonalDetails.aspx" class="nav-link">
+                  <i class="nav-icon 	far fa-address-card"></i>
+                  <p>
+                    Personal Details
+                  </p>
+                </a>
+              </li>-->
+             <!-- <li class="nav-item">
+                <a href="./VerifyDocuments.aspx" class="nav-link">
+                  <i class="nav-icon fa fa-upload"></i>
+                  <p>
+                    Verify Documents
+                  </p>
+                </a>
+              </li>-->
+              <li class="nav-item">
+                <a href="./DashBoard.aspx" class="nav-link">
+                  <i class="nav-icon fa fa-home"></i>
+                  <p>
+                    Home
+                  </p>
+                </a>
+              </li>
+                            <li class="nav-item">
+                <a href="./PersonalDetails.aspx" class="nav-link">
+                  <i class="nav-icon fas fa-portrait"></i>
+                  <p>
+                    Personal Details
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./LoanStatus.aspx" class="nav-link">
+                  <i class="nav-icon fas fa-hand-holding-usd"></i>
+                  <p>
+                    Apply for Loan
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="./MilkDetails.aspx" class="nav-link">
+                  <i class="nav-icon fa fa-edit"></i>
+                  <p>
+                    Add Milk Details
+                  </p>
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+      </aside>
+      <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+      </asp:ContentPlaceHolder>
+
+      <footer class="main-footer" style="background-color:beige;">
+        <strong>Copyright &copy; 2023 | P2P MicroFinance & Allied Services</strong>
+        All rights reserved.
+  
+      </footer>
+    </div>
+  </form>
+
+<script>
+  // Function to show the loader
+  function showLoader() {
+    document.getElementById("loader").style.display = "block";
+  }
+
+  // Function to hide the loader
+  function hideLoader() {
+    document.getElementById("loader").style.display = "none";
+  }
+
+  // Event handler for page load
+  window.addEventListener("load", function () {
+    hideLoader(); // Hide the loader when the page has finished loading.
+  });
+
+  // Event handler for beforeunload (page is about to reload)
+  window.addEventListener("beforeunload", function () {
+    showLoader(); // Show the loader when the page is about to reload.
+
+    // Set a timeout to hide the loader after 3 seconds (3000 milliseconds)
+    setTimeout(function () {
+      window.location.reload();
+      hideLoader();// Reload the page after a delay (adjust this as needed)
+    }, 3000);
+    window.addEventListener("load", function () {
+      hideLoader();// Reload the page after a delay (adjust this as needed)
+    });
+  });
+  </script>
+
+
+
+
+  <script>
+    function LogHistory() {
+      window.location.replace("..//UserLR/Login.aspx");
+      Session.Clear();
+      Session.RemoveAll();
+      Session.Abandon();
+    }
+  </script>
+  <!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="../../plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="../../plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<script src="../../plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="../../plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="../../plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="../../plugins/moment/moment.min.js"></script>
+<script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="../../plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="../../dist/js/pages/dashboard.js"></script>
+</body>
+</html>

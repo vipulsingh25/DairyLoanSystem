@@ -1,0 +1,123 @@
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Xml.Linq;
+
+public partial class FarmerMP_UserDetails : System.Web.UI.Page
+{
+
+  SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MyDBconnection"].ConnectionString);
+
+  protected void Page_Load(object sender, EventArgs e)
+    {
+    if (Session["Name"] != null)
+    {
+      tb_Name.Text = Session["Name"].ToString();
+    }
+
+    if (Session["email"] != null)
+    {
+      tb_Email.Text = Session["email"].ToString();
+    }
+
+      /*if (IsPersonalDetailsUpdated())
+      {
+        string script = "<script>alert('User Not Register or Incorrect Details');</script>";
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "Alert", script);
+      }
+      else
+      {
+        Response.Redirect("./UserDetails.aspx"); // Redirect if personal details not updated
+      }*/
+    }
+
+
+  /*protected bool IsUserLoggedIn()
+  {
+    if (Session["ID"].ToString() != null)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }*/
+
+  protected bool IsPersonalDetailsUpdated()
+  {
+    connection.Open();
+    string UpdateStatus = "Select CASE WHEN mobile IS NULL or gender IS NULL or address IS NULL or pin IS NULL or city IS NULL or state IS NULL Then 'false' ELSE 'true' END AS UpdateStatus from Register_Farmers where id = " + Session["ID"].ToString() + ";";
+    SqlCommand cmd = new SqlCommand(UpdateStatus, connection);
+    SqlDataReader Reader = cmd.ExecuteReader();
+    if (Reader.Read())
+    {
+      String Status = Reader["UpdateStatus"].ToString();
+      if(Status == "true")
+      {
+        return true;
+      }
+      connection.Close();
+    }
+    return false;
+  }
+
+  protected void getdata()
+  {
+
+    String Validate = "Select * from Register_Farmers where ID = @id";
+      SqlCommand cmd = new SqlCommand(Validate, connection);
+      cmd.Parameters.AddWithValue("@id", Session["ID"].ToString());
+
+      SqlDataReader Reader = cmd.ExecuteReader();
+      if (Reader.HasRows)
+      {
+        while (Reader.Read())
+        {
+          string id = Reader["ID"].ToString();
+          string Name = Reader["Name"].ToString();
+          string Email = Reader["Email"].ToString();
+          string mobile = Reader["mobile"].ToString();
+          string gender = Reader["gender"].ToString();
+          string address = Reader["address"].ToString();
+          string pin = Reader["pin"].ToString();
+          string city = Reader["city"].ToString();
+          string state = Reader["state"].ToString();
+          Session["Name"] = Name;
+          Session["Email"] = Email;
+          Session["Id"] = id;
+          Session["Mobile"] = mobile;
+          Session["Gender"] = gender;
+          Session["Address"] = address;
+          Session["Pin"] = pin;
+          Session["City"] = city;
+          Session["State"] = state;
+        }
+        Reader.Close(); // Close the SqlDataReader
+      }
+  }
+  protected void submit_Click(object sender, EventArgs e)
+    {
+    string Mobile = tb_Mobile.Text;
+    string Gender = dd_Gender.Text;
+    string Address = tb_Address.Text;
+    string Pin = tb_Pin.Text;
+    string State = tb_State.Text;
+    string City = tb_City.Text;
+    connection.Open();
+    SqlCommand cmds = new SqlCommand("UPDATE Register_Farmers SET mobile = N'" + Mobile.Replace("'","") + "', gender = N'" + Gender.Replace("'","") + "',address = N'" + Address.Replace("'","") + "',pin = N'" + Pin.Replace("'","") +
+      "',city = N'" + City.Replace("'","") + "',state = N'" + State.Replace("'","") + "' where ID = N'" + Session["ID"].ToString() + "';select SCOPE_IDENTITY();", connection);
+    int iss = cmds.ExecuteNonQuery();
+    if (iss > 0)
+    {
+      getdata();
+      Response.Redirect("./PersonalDetails.aspx");
+    }
+    connection.Close();
+  }
+}

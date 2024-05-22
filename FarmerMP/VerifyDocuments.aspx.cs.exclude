@@ -1,0 +1,65 @@
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class FarmerMP_VerifyDocuments : System.Web.UI.Page
+{
+  SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MyDBconnection"].ConnectionString);
+
+  protected void Page_Load(object sender, EventArgs e)
+  {
+
+  }
+
+  protected void btn_Verify_Click(object sender, EventArgs e)
+  {
+      string ID = Session["ID"].ToString();
+      string Name = tb_Aadharname.Text;
+      string Aadhar = tb_Aadharnumber.Text;
+      string Pancard = tb_Pancardnumber.Text;
+      if (fileUpload.HasFile)
+      {
+        try
+        {
+          string fileName = Path.GetFileName(fileUpload.FileName);
+          string uploadPath = Server.MapPath("~/images/") + fileName;
+
+          fileUpload.SaveAs(uploadPath);
+
+          connection.Open();
+          string Upload = "insert into Farmer_Documents(ID,Name,Aadhar_Number,Pancard_Number,Aadhar_Image) values(@ID,@Name,@Aadhar,@Pancard,@ImagePath)";
+          SqlCommand cmds = new SqlCommand(Upload, connection);
+          cmds.Parameters.AddWithValue("@ID", ID);
+          cmds.Parameters.AddWithValue("@Name", Name);
+          cmds.Parameters.AddWithValue("@Aadhar", Aadhar);
+          cmds.Parameters.AddWithValue("@Pancard", Pancard);
+          cmds.Parameters.AddWithValue("@ImagePath", "~/images/" + fileName);
+          cmds.CommandTimeout = 120;
+          int rowsAffected = cmds.ExecuteNonQuery();
+          if (rowsAffected > 0)
+          {
+           Verify_msg.Text = "Image uploaded and data stored successfully!";
+          string styledContent = "<div><img src='../../images/9738321_1.jpg'></img>Uploaded Image</div>";
+
+          show.Text = styledContent;
+          }
+          connection.Close();
+        }
+        catch (Exception ex)
+        {
+          Verify_msg.Text = "Error: " + ex.Message;
+        }
+      }
+      else
+      {
+        Verify_msg.Text = "Please choose an image to upload.";
+      }
+    }
+
+  }

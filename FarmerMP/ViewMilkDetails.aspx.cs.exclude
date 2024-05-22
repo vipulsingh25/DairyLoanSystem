@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Text;
+
+public partial class FarmerMP_ViewMilkDetails : System.Web.UI.Page
+{
+
+  SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MyDBconnection"].ConnectionString);
+  DataTable dt = new DataTable();
+  protected void Page_Load(object sender, EventArgs e)
+    {
+    String get = "Select * from Milk_Details Where ID = " + Session["ID"].ToString() + ";";
+    SqlCommand d = new SqlCommand(get, connection);
+    SqlDataAdapter ad = new SqlDataAdapter(d);
+    ad.Fill(dt);
+
+    StringBuilder sb = new StringBuilder();
+    sb.Append("<thead><tr><th>Sno</th><th>Date</th><th>Milk Type</th><th>Milk Quantity (Kg)</th><th>Rate Per Kg</th><th>Total Cost</th></tr></thead> ");
+    sb.Append("<tbody>");
+
+    int i = 1;
+    foreach (DataRow rows in dt.Rows)
+    {
+      
+      sb.Append("<tr>");
+      sb.Append("<td>" + i++ + "</td>");
+      sb.Append("<td>" + rows["Date"] + "</td>");
+      sb.Append("<td>" + rows["Milk_Type"] + "</td>");
+      sb.Append("<td>" + rows["Milk_Quantity"] + "</td>");
+      sb.Append("<td>" + rows["Rate_Per_Kg"] + "</td>");
+      sb.Append("<td>" + rows["Total_Cost"] + "</td>");
+      sb.Append("</tr>");
+    }
+
+    sb.Append("</tbody>");
+
+    show.Text = sb.ToString();
+
+  }
+}

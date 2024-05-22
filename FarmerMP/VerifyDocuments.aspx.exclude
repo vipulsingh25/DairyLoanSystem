@@ -1,0 +1,113 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/FarmerMP/MasterPage.master" AutoEventWireup="true" CodeFile="VerifyDocuments.aspx.cs" Inherits="FarmerMP_VerifyDocuments" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+  <div class="wrapper">
+    <div class="content-wrapper">
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row" style="justify-content: center;">
+            <!-- left column -->
+            <div class="col-md-6 mt-4">
+              <!-- general form elements -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Upload Documents</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <div runat="server" action="#" method="post">
+                  <div class="card-body">
+                    <div class="form-group">
+                      <asp:Label runat="server">Name(Acc. to Aadhar)</asp:Label>
+                      <asp:TextBox runat="server" class="form-control" ID="tb_Aadharname" placeholder="Enter Full Name" />
+                      <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
+                        ControlToValidate="tb_Aadharname"
+                        InitialValue=""
+                        ErrorMessage="Required Field"
+                        ForeColor="Red"
+                        CssClass="validation-error1"
+                        Display="Dynamic">
+                      </asp:RequiredFieldValidator>
+                    </div>
+                    <div class="form-group">
+                      <asp:Label runat="server">Aadhar Number</asp:Label>
+                      <asp:TextBox runat="server" class="form-control" ID="tb_Aadharnumber" placeholder="Aadhar Number" />
+                                                                  <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+                        ControlToValidate="tb_Aadharnumber"
+                        InitialValue=""
+                        ErrorMessage="Required Field"
+                        ForeColor="Red"
+                        CssClass="validation-error1"
+                        Display="Dynamic">
+                      </asp:RequiredFieldValidator>
+                    <!--<asp:RegularExpressionValidator
+                        ID="validateAadhar"
+                        runat="server"
+                        ControlToValidate="tb_Aadharnumber"
+                        ValidationExpression="^[0-9]{12}$"
+                        ErrorMessage="Invalid Aadhar number. Please enter a 12-digit Aadhar number."
+                                              ForeColor="Red"
+                        CssClass="validation-error1"
+                        Display="Dynamic"
+                    ></asp:RegularExpressionValidator>-->
+                    </div>
+                    <div class="form-group">
+                      <asp:Label runat="server">Pancard Number</asp:Label>
+                      <asp:TextBox runat="server" class="form-control" ID="tb_Pancardnumber" placeholder="Pancard Number" />
+                    <!--<asp:RegularExpressionValidator
+                        ID="validatePAN"
+                        runat="server"
+                        ControlToValidate="tb_Pancardnumber"
+                        ValidationExpression="^[A-Z]{5}[0-9]{4}[A-Z]{1}$"
+                        ErrorMessage="Invalid PAN card number. Please enter a valid PAN card number."
+                                              ForeColor="Red"
+                        CssClass="validation-error1"
+                        Display="Dynamic"
+                    ></asp:RegularExpressionValidator>-->
+                    </div>
+                    <div class="form-group">
+                      <asp:Label ID="Photo_Aadhar" runat="server">Upload Aadhar Photo</asp:Label>
+                      <div class="input-group">
+                        <div class="custom-file">
+                          <asp:FileUpload ID="fileUpload" runat="server" accept=".jpg, .png, .pdf" />
+                          <asp:RegularExpressionValidator ID="regexValidator" runat="server"
+                            ControlToValidate="fileUpload"
+                            ValidationExpression="^.+\.(jpg|png|pdf)$"
+                            ErrorMessage="Only JPG, PNG, and PDF files are allowed."
+                            Display="Dynamic" />
+                          <!-- <asp:CompareValidator ID="compareValidator" runat="server"
+                            ControlToValidate="fileUpload"
+                            Operator="LessThanEqual"
+                            ValueToCompare="1048576"
+                            ErrorMessage="File size must be 1 MB or smaller."
+                            Display="Dynamic" />-->
+
+                        </div>
+                        <div class="input-group-append">
+                          <span style="color: red;">*Only in ".jpg, .png, .pdf" format</span>
+                        </div>
+                      </div>
+                    </div>
+                    <asp:Label runat="server" ID="Verify_msg" Style="color: #4CAF50;"></asp:Label>
+                  </div>
+                  <!-- /.card-body -->
+
+                  <div class="card-footer" style="display: flex; justify-content: center;">
+                    <asp:Button runat="server" ID="btn_Verify" class="btn btn-primary" Text="Submit" OnClick="btn_Verify_Click"></asp:Button>
+                  </div>
+                  <!--<a href="Default.aspx?imageID=123">Download Image</a>-->
+
+                </div>
+                <div>                                                   <asp:Literal runat="server" ID="show">
+                                      </asp:Literal></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</asp:Content>
+
