@@ -23,7 +23,20 @@ Project encompasses the creation of four distinct portals: the **Farmer Portal**
 
 ## Screenshots
 
-![App Screenshot](https://drive.google.com/file/d/1u15hY-vBxwOV_GFsMQDpb96Qu6ToX3ll/view?usp=drive_link)
+**Farmer Portal**
+![](images/Screenshot%20(193).png)
+![](images/Screenshot%20(195).png)
+![](images/Screenshot%20(196).png)
+
+**Agent Portal**
+![](images/Screenshot%20(193).png)
+
+**Admin Portal**
+![](images/Screenshot%20(203).png)
+![](images/Screenshot%20(204).png)
+
+**Bank Portal**
+![](images/Screenshot%20(201).png)
 
 
 ## Features
